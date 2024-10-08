@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="BTec FPI Ha Noi"
+        android:textStyle="bold"
+        android:id="@+id/tvTitleSchool"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Copyright 2024 SE06205"
+        android:textSize="18sp"
+        android:id="@+id/tvCopyright"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/tvTitleSchool"
+        android:id="@+id/imgLogo"/>
+    <EditText
+        android:layout_below="@id/imgLogo"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#9EDBE3"
+        android:hint="Eneter username"
+        android:inputType="text"
+        android:paddingStart="10dp"
+        android:id="@+id/edtUsername"/>
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#9EDBE3"
+        android:hint="Eneter Password"
+        android:inputType="textPassword"
+        android:paddingStart="10dp"
+        android:layout_below="@id/edtUsername"
+        android:layout_marginTop="10dp"/>
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="Login"
+        android:layout_marginEnd="17dp"
+        android:layout_below="@+id/edtPassword"
+        android:layout_marginTop="10dp"/>
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/edtPassword"
+        android:layout_toRightOf="@+id/btnLogin"
+        android:layout_marginTop="10dp"
+        android:text="Cancel"/>
+    <TextView
+        android:id="@+id/txtDoU"
+        android:layout_below="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you have an account?"
+        android:layout_marginTop="10dp"
+        android:layout_centerInParent="true"
+        android:textSize="16dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign up."
+        android:layout_below="@+id/txtDoU"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textColor="#47B5E6"
+        android:textSize="16dp"/>
+</RelativeLayout>
