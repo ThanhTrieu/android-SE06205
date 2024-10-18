@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login System"
+        android:text="Signup Account"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"/>
@@ -41,23 +41,15 @@
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:id="@+id/btnLogin"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"/>
+            android:id="@+id/btnRegister"/>
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register account"
+        android:text="Login"
         android:layout_marginTop="20dp"
         android:textSize="18sp"
         android:textColor="#065DA2"
         android:textStyle="bold"
-        android:id="@+id/tvRegister"/>
+        android:id="@+id/tvLogin"/>
 </LinearLayout>

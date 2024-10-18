@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,8 +19,13 @@
         <activity android:name=".DemoLayoutActivity"/>
         <activity android:name=".DemoEventActivity"/>
         <activity android:name=".LifeCycleSecondActivity"/>
+        <activity android:name=".LifeCycleActivity"/>
+        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".DashboardActivity"/>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".DemoIntentActivity"/>
         <activity
-            android:name=".LifeCycleActivity"
+            android:name=".SharedPreferencesActivity"
             android:exported="true"
             android:theme="@style/Theme.CampusExpenseSE06205">
             <intent-filter>
