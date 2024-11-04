@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                     if (checkLogin){
-                        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                         startActivity(intent);
                         finish();
                     } else {

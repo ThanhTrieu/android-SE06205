@@ -1,5 +1,6 @@
 package com.example.campusexpensese06205;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,12 @@ public class SharedPreferencesActivity extends AppCompatActivity {
         btnClear = findViewById(R.id.btnClear);
         tvHistory = findViewById(R.id.tvHistory);
         edtResult.setEnabled(false);
+
+        // lay du lieu tu SharedPreferences
+        SharedPreferences shared = getSharedPreferences("calculateMath", MODE_PRIVATE);
+        history = shared.getString("historyMath","");
+        tvHistory.setText(history); // xem lai lich su da tung thao tac
+
         btnCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,5 +56,15 @@ public class SharedPreferencesActivity extends AppCompatActivity {
                 edtResult.setText("");
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // xu ly luu du lieu
+        SharedPreferences myPrefs = getSharedPreferences("calculateMath", MODE_PRIVATE);
+        SharedPreferences.Editor editor = myPrefs.edit();
+        editor.putString("historyMath", history);
+        editor.apply();
     }
 }

@@ -22,10 +22,11 @@
         <activity android:name=".LifeCycleActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".DashboardActivity"/>
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".MenuActivity"/>
         <activity android:name=".DemoIntentActivity"/>
+        <activity android:name=".SharedPreferencesActivity"/>
         <activity
-            android:name=".SharedPreferencesActivity"
+            android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.CampusExpenseSE06205">
             <intent-filter>
