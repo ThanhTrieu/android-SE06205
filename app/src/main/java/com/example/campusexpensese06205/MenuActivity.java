@@ -1,19 +1,26 @@
 package com.example.campusexpensese06205;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.campusexpensese06205.adapter.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
-public class MenuActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     BottomNavigationView bottomNavigationView;
+    NavigationView navigationView;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ViewPager2 viewPager2;
@@ -25,14 +32,31 @@ public class MenuActivity extends AppCompatActivity {
         viewPager2 = findViewById(R.id.viewPager);
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
+        navigationView = findViewById(R.id.nav_view);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        navigationView.setNavigationItemSelectedListener(this);
+        Menu menu = navigationView.getMenu();
+        MenuItem logout = menu.findItem(R.id.nav_logout);
+
         setupViewPager2();
         clickItemTabMenu();
+
+        // logout
+        logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                Intent intentLogout = new Intent(MenuActivity.this, LoginActivity.class);
+                startActivity(intentLogout);
+                finish();
+                return false;
+            }
+        });
     }
     private void clickItemTabMenu(){
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -80,5 +104,20 @@ public class MenuActivity extends AppCompatActivity {
                 super.onPageScrollStateChanged(state);
             }
         });
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.home_menu){
+            viewPager2.setCurrentItem(0);
+        } else if (item.getItemId() == R.id.expenses_menu) {
+            viewPager2.setCurrentItem(1);
+        } else if (item.getItemId() == R.id.budget_menu) {
+            viewPager2.setCurrentItem(2);
+        } else if (item.getItemId() == R.id.setting_menu) {
+            viewPager2.setCurrentItem(3);
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

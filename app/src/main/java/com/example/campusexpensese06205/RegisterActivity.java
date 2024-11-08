@@ -2,6 +2,7 @@ package com.example.campusexpensese06205;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,15 +12,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.campusexpensese06205.database.UserDb;
 
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView tvLogin;
-    EditText edtUser, edtPass;
+    EditText edtUser, edtPass, edtEmail, edtPhone, edtAddress;
     Button btnSignup;
+    UserDb userDb;
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +34,61 @@ public class RegisterActivity extends AppCompatActivity {
         tvLogin = findViewById(R.id.tvLogin);
         edtUser = findViewById(R.id.edtUsername);
         edtPass = findViewById(R.id.edtPassword);
+        edtEmail = findViewById(R.id.edtEmail);
+        edtPhone = findViewById(R.id.edtPhone);
+        edtAddress = findViewById(R.id.edtAddress);
         btnSignup = findViewById(R.id.btnRegister);
+        userDb = new UserDb(RegisterActivity.this);
 
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signupWithDatabase();
+            }
+        });
+        tvLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void signupWithDatabase(){
+        String user = edtUser.getText().toString().trim();
+        String pass = edtPass.getText().toString().trim();
+        String email = edtEmail.getText().toString().trim();
+        String phone = edtPhone.getText().toString().trim();
+        String address = edtAddress.getText().toString().trim();
+        if (TextUtils.isEmpty(user)){
+            edtUser.setError("Username not empty");
+            return;
+        }
+        if (TextUtils.isEmpty(pass)){
+            edtPass.setError("Password not empty");
+            return;
+        }
+        if (TextUtils.isEmpty(email)){
+            edtEmail.setError("Email not empty");
+            return;
+        }
+        if (TextUtils.isEmpty(phone)){
+            edtPhone.setError("Phone not empty");
+            return;
+        }
+        long insert = userDb.addNewAccountUser(user, pass, email, phone, address);
+        if (insert == -1){
+            // loi - khong insert duoc
+            Toast.makeText(RegisterActivity.this, "Create Failure", Toast.LENGTH_SHORT).show();
+        } else {
+            // thanh cong
+            Toast.makeText(RegisterActivity.this, "Create Successfully", Toast.LENGTH_SHORT).show();
+            Intent intentLogin = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intentLogin);
+        }
+    }
+    private void signupWithDataFile(){
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,13 +119,6 @@ public class RegisterActivity extends AppCompatActivity {
                 } catch (Exception exception){
                     exception.printStackTrace();
                 }
-            }
-        });
-        tvLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
             }
         });
     }
